@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/sea.js"></script>
+    <script type="text/javascript">
+        seajs.config({
+            base:'js',
+            alias:{
+                'm1':'../js3/m1',
+                'm2':'./js3/m2'
+            }
+        });
+        seajs.use(['./js/a','./js/b'], function (a,b) {
+            /*alert(a.data);
+            alert(a.x);
+            alert(a.y);*/
+//            alert(b.data);
+//            alert(b.m1Data);//测试别名配置
+//            console.log(b.m1Data);
+          console.log(b.m1Data);
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
