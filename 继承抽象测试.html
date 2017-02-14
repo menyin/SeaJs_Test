@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/sea.js"></script>
+    <script>
+        seajs.use(['./inherit_test/student'], function (Student) {
+            var student = new Student();
+            console.log(student);
+            student.name = '小红';
+            student.showName();
+            Student.showType();
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

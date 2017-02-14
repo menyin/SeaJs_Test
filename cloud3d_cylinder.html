@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .cylinder {
+            width: 300px;
+            height: 300px;
+            margin: 0;
+            padding: 0;
+            /*background: gray;*/
+            list-style: none;
+            top: calc(50% - 150px);
+            left: calc(50% - 150px);
+            position: absolute;
+            transform-style: preserve-3d;
+            border: 1px solid red;
+        }
+        .cylinder li {
+            width: 20px;
+            height: 20px;
+            font-size:12px;
+            line-height:20px;
+            color:#ffffff;
+            background: #e74773;
+            text-shadow: 0 0 1px #c7c5c5;
+            /*background: #e74773;*/
+            top: calc(50% - 10px);
+            left: calc(50% - 10px);
+            position: absolute;
+            transform-style: preserve-3d;
+            transform-orign: center center;
+            text-align:center;
+
+        }
+        .cloud3d {
+            width: 300px;
+            height: 300px;
+            margin: 0px auto;
+            border: 1px solid red;
+            position: relative;
+            perspective: 800px;
+            perspective-origin: center center;
+        }
+    </style>
+</head>
+<body>
+<div class="cloud3d">
+    <ul class="cylinder" id="cylinder">
+    </ul>
+
+</div>
+<input type="button" id="bt" value="圆柱出来"/>
+<input type="button" id="bt2" value="圆柱转动"/>
+</body>
+</html>
+<script src="js/jquery-1.11.1.js"></script>
+<script>
+    var oUl = document.getElementById('cylinder');
+    $('#bt').click(function () {
+        var sTxt = '熟悉模块化面向对象的方式编程熟悉Javascript编写过Javascript运动类库熟悉常用js框架使用了解AngularJs了解HTML 5新标签的语义';
+        //假设假设圆柱高h=200，宽高比ratio=4:5,每层字数在18
+        var h=220;
+         var ratio=4/5;
+        var layers = 0;
+        var nums=14;
+        for (var i = 3; i < 20; i++) {
+            if (i*nums> sTxt.length) {
+                layers = i - 1;
+                break;
+            }
+        }
+
+        //填充li到ul
+        sTxt = sTxt.substring(0,layers*nums);
+        for (var i=0;i<sTxt.length;i++) {
+            var oLi = document.createElement('li');
+            oLi.innerHTML = sTxt[i];
+            oLi.id=i;
+            oUl.appendChild(oLi);
+        }
+
+        //
+        var aLi = oUl.getElementsByTagName('li');
+        var r=h*ratio/2
+        for (var layer=1;layer<=layers;layer++) {
+            var y = (h / (layers - 1)) * (layer - 1)-h/2;//减去h/2是为了使得图形向上平移并且图形的中心在中央
+            for (var num=1;num<=nums;num++) {
+                var bld = 2*Math.PI*(num-1)/nums;
+                var x = r *Math.cos(bld);
+                var z = r *Math.sin(bld);
+                var transXYZ = 'translate3d(' +x+ 'px,' +  y+ 'px,' + z + 'px' + ')';
+                transXYZ += 'rotateY(' + (Math.PI-bld-Math.PI/2)+'rad)';
+//                transXYZ += ' rotateX(' +(1*Math.PI /6)+'rad)'
+                var index = getIndex(layer, num);
+                aLi[index].style.transform=transXYZ
+            }
+        }
+
+        //获取当前字的索引
+        function getIndex(layer,num) {
+            return (layer-1)*nums+num-1;
+        }
+    });
+    $('#bt2').click(function () {
+        var oUl = document.getElementById('cone');
+        var iNow=0;
+        setInterval(function () {
+            oUl.style.transform = 'rotateX(' + 0 + 'deg)'+'rotateY(' + iNow + 'deg)'+'rotateZ(' + 0 + 'deg)';
+            iNow++;
+        },100);
+
+    });
+</script>

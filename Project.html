@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+        body {
+            background: #FFE2FE;
+        }
+        .circle3d {
+            width: 1170px;
+            height: 700px;
+            top: 10px;
+            left: calc(50% - 585px);
+            position:absolute;
+            border:1px solid red;
+            perspective:1000px;
+        }
+        .circle3d .circle3d_li {
+            position:absolute;
+            transform: scale(0);
+            opacity:0;
+        }
+        .circle3d .circle3d_li.scaleIn{
+            animation: scaleIn .8s ease-in-out forwards;
+            -webkit-animation: scaleIn .8s ease-in-out forwards;
+            transform: scale(1);
+            opacity:1;
+        }
+        @keyframes scaleIn {
+            0%{transform:scale(0);opacity:0;}
+            70%{transform:scale(1.1);opacity:1;}
+            100%{transform:scale(1);}
+        }
+
+        .circle3d .circle3d_li:nth-of-type(1) {
+            width: 132px;
+            height: 132px;
+            top:300px;
+            left:20px;
+        }
+        .circle3d .circle3d_li:nth-of-type(2) {
+            width: 150px;
+            height: 150px;
+            top:100px;
+            left:84px;
+        }
+        .circle3d .circle3d_li:nth-of-type(3) {
+            width: 114px;
+            height: 114px;
+            top:460px;
+            left:162px;
+        }
+        .circle3d .circle3d_li:nth-of-type(4) {
+            width: 270px;
+            height: 270px;
+            top:164px;
+            left:318px;
+        }
+        .circle3d .circle3d_li:nth-of-type(5) {
+            width: 204px;
+            height: 204px;
+            top:0px;
+            left:538px;
+        }
+        .circle3d .circle3d_li:nth-of-type(6) {
+            width: 214px;
+            height: 214px;
+            top:232px;
+            left:666px;
+        }
+        .circle3d .circle3d_li:nth-of-type(7) {
+            width: 172px;
+            height: 172px;
+            top:72px;
+            left:900px;
+        }
+        .circle3d .circle3d_li:nth-of-type(8) {
+            width: 130px;
+            height: 130px;
+            top:380px;
+            left:1040px;
+        }
+
+        .circle3d .circle3d_a {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius:50%;
+            position: absolute;
+        }
+        .circle3d .circle3d_dl {
+            width: 100%;
+            height: 100%;
+            top: -4px;
+            left: -4px;
+            position: absolute;
+            transition: 1s;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            transform-style: preserve-3d;
+            tranform-origin: center center;
+            backface-visibility: hidden;
+
+        }
+        .circle3d .circle3d_li:hover .circle3d_dl{
+            transform: rotateY(180deg);
+        }
+
+        .circle3d .circle3d_li:hover .circle3d_dt p {
+            top:40%;
+        }
+        .circle3d .circle3d_dt,.circle3d .circle3d_dd {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius:50%;
+            top:0;
+            left:0;
+            position:absolute;
+            transform-style:preserve-3d;
+            transform: translateZ(0.1px) rotateY(0deg);
+        }
+        .circle3d .circle3d_dt{
+            transform: translateZ(-0.1px) rotateY(180deg);
+        }
+        .circle3d .circle3d_dt p {
+            width: 92%;
+            height: 60%;
+            /*top: 40%;*/
+            top:100%;
+            left: 0;
+            padding: 4%;
+            padding-top:8%;
+            color: #ffffff;
+            overflow: hidden;
+            text-align: center;
+            font-size:18px;
+            line-height: 26px;
+            position: absolute;
+            transition:top .3s .5s;
+
+            background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+            background: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+        }
+
+    </style>
+</head>
+<body>
+    <ul class="circle3d" id="circle3d">
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <i class="circle3d_bg"></i>
+        <li class="circle3d_li">
+            <dl class="circle3d_dl">
+                <dt class="circle3d_dt" style="background:url(images/project_item2.jpg) no-repeat center center"><p>纯H5+CSS3搭建的网站项目纯H5+CSS3搭建的网站项目纯H5+CSS3搭建的网站项目</p></dt>
+                <dd class="circle3d_dd" style="background:url(images/project_item1.png) no-repeat center center"></dd>
+            </dl>
+            <a class="circle3d_a" href="http://www.baidu.com"></a>
+        </li>
+        <li class="circle3d_li">
+            <dl class="circle3d_dl">
+                <dt class="circle3d_dt" style="background:url(images/project_item2.jpg) no-repeat center center"><p>纯H5+CSS3搭建的网站项目</p></dt>
+                <dd class="circle3d_dd" style="background:url(images/project_item1.png) no-repeat center center"></dd>
+            </dl>
+            <a class="circle3d_a" href="http://www.baidu.com"></a>
+        </li>
+        <li class="circle3d_li">
+            <dl class="circle3d_dl">
+                <dt class="circle3d_dt" style="background:url(images/project_item2.jpg) no-repeat center center"><p>纯H5+CSS3搭建的网站项目</p></dt>
+                <dd class="circle3d_dd" style="background:url(images/project_item1.png) no-repeat center center"></dd>
+            </dl>
+            <a class="circle3d_a" href="http://www.baidu.com"></a>
+        </li>
+        <li class="circle3d_li">
+            <dl class="circle3d_dl">
+                <dt class="circle3d_dt" style="background:url(images/project_item2.jpg) no-repeat center center"><p>纯H5+CSS3搭建的网站项目</p></dt>
+                <dd class="circle3d_dd" style="background:url(images/project_item1.png) no-repeat center center"></dd>
+            </dl>
+            <a class="circle3d_a" href="http://www.baidu.com"></a>
+        </li>
+        <li class="circle3d_li">
+            <dl class="circle3d_dl">
+                <dt class="circle3d_dt" style="background:url(images/project_item2.jpg) no-repeat center center"><p>纯H5+CSS3搭建的网站项目</p></dt>
+                <dd class="circle3d_dd" style="background:url(images/project_item1.png) no-repeat center center"></dd>
+            </dl>
+            <a class="circle3d_a" href="http://www.baidu.com"></a>
+        </li>
+        <li class="circle3d_li">
+            <dl class="circle3d_dl">
+                <dt class="circle3d_dt" style="background:url(images/project_item2.jpg) no-repeat center center"><p>纯H5+CSS3搭建的网站项目</p></dt>
+                <dd class="circle3d_dd" style="background:url(images/project_item1.png) no-repeat center center"></dd>
+            </dl>
+            <a class="circle3d_a" href="http://www.baidu.com"></a>
+        </li>
+        <li class="circle3d_li">
+            <dl class="circle3d_dl">
+                <dt class="circle3d_dt" style="background:url(images/project_item2.jpg) no-repeat center center"><p>纯H5+CSS3搭建的网站项目</p></dt>
+                <dd class="circle3d_dd" style="background:url(images/project_item1.png) no-repeat center center"></dd>
+            </dl>
+            <a class="circle3d_a" href="http://www.baidu.com"></a>
+        </li>
+        <li class="circle3d_li">
+            <dl class="circle3d_dl">
+                <dt class="circle3d_dt" style="background:url(images/project_item2.jpg) no-repeat center center"><p>纯H5+CSS3搭建的网站项目</p></dt>
+                <dd class="circle3d_dd" style="background:url(images/project_item1.png) no-repeat center center"></dd>
+            </dl>
+            <a class="circle3d_a" href="http://www.baidu.com"></a>
+        </li>
+    </ul>
+</body>
+</html>
+<script>
+    var circle3d = document.getElementById('circle3d');
+    var aLi = circle3d.getElementsByTagName('li');
+    var aLiArray = [];
+    for (var i=0;i<aLi.length;i++) {
+        aLiArray.push(aLi[i]);
+    }
+    aLiArray.sort(randomSort);
+    var iNow=0;
+    var timer=setInterval(function () {
+        if (iNow==aLiArray.length-1) {
+            clearInterval(timer);
+        }
+        console.log(iNow);
+        aLiArray[iNow].className += ' scaleIn';
+        iNow++;
+    },500);
+
+    //随机排序对比函数
+    function randomSort(a,b) {
+        return Math.random()>0.5?-1:1;
+    }
+
+    var circle3d_bg = circle3d.getElementsByTagName('i');
+    for (var i=0;i<circle3d_bg.length;i++) {
+        var iRandowTop=Math.random()*400;
+        var iRandowLeft=Math.random()*1000;
+        var iRandowSize=Math.random()*200;
+        var iRandowOpacity=Math.random();
+        circle3d_bg[i].style.position='absolute';
+        circle3d_bg[i].style.width = circle3d_bg[i].style.height = iRandowSize + 'px';
+        circle3d_bg[i].style.borderRadius='50%';
+        circle3d_bg[i].style.background='#ffffff';
+        circle3d_bg[i].style.opacity=iRandowOpacity;
+        circle3d_bg[i].style.top=iRandowTop+'px';
+        circle3d_bg[i].style.left=iRandowLeft+'px';
+    }
+</script>

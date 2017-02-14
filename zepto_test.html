@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="zepto/zepto.js"></script>
+    <script src="zepto/event.js"></script>
+    <script src="zepto/ajax.js"></script>
+    <style>
+        #dv {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            border:1px solid red;
+        }
+    </style>
+
+</head>
+<body>
+<div id="dv"></div>
+</body>
+</html>
+<script>
+    $('#dv').css('background', 'red');
+    $.get('http:www.baidu.com', {}, function () {
+        alert();
+    });
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="jcanvascript/jcanvascript1.5.18.js"></script>
+</head>
+<body>
+<canvas height="200" width="500" id="canvas_1"></canvas>
+<input type="button" id="bt"/>
+</body>
+</html>
+<script type="text/javascript">
+        jc.start('canvas_1');
+       jc.circle(100,100,50,'black',1).id('dddd')
+        jc.rect(150,40,50,60,1)
+                .rotate(30,'center').click(function () {
+                    alert(555);
+                });
+        var bt = document.getElementById('bt');
+        bt.onclick= function () {
+            jc('#canvas_1').animate({x: 175}, 2000, function () {
+                alert(333);
+            });
+        };
+        jc.start('canvas_1');
+
+</script>

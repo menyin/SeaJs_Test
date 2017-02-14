@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .ball {
+            width: 300px;
+            height: 300px;
+            margin: 0;
+            padding: 0;
+            /*background: gray;*/
+            list-style: none;
+            top: calc(50% - 150px);
+            left: calc(50% - 150px);
+            position: absolute;
+            transform-style: preserve-3d;
+            border: 1px solid red;
+        }
+
+        .ball li {
+            width: 20px;
+            height: 20px;
+            color:#ffffff;
+            text-shadow: 0 0 1px #c7c5c5;
+            background: #e74773;
+            top: calc(50% - 8px);
+            left: calc(50% - 8px);
+            position: absolute;
+            transform-style: preserve-3d;
+            transform-orign: center center;
+            text-align:center;
+
+        }
+
+        .cloud3d {
+            width: 300px;
+            height: 300px;
+            margin: 0px auto;
+            border: 1px solid red;
+            position: relative;
+            perspective: 800px;
+            perspective-origin: center center;
+        }
+    </style>
+</head>
+<body>
+<input type="button" id="bt" value="球出来"/>
+<input type="button" id="bt2" value="球转动"/>
+
+<div class="cloud3d">
+    <ul class="ball" id="ball">
+    </ul>
+</div>
+</body>
+</html>
+<script src="zepto/zepto.js"></script>
+<script src="zepto/event.js"></script>
+<script src="zepto/fx.js"></script>
+<script src="zepto/fx_methods.js"></script>
+<script>
+    var oUl = document.getElementById('ball');
+
+    $('#bt').click(function () {
+//        var sTxt = $('#txt').val();
+//        var sTxt = 'vsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdf';
+//        var sTxt = 'dfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdfvsdagadfgadfgsdfgsdfgsdf';
+        var sTxt = '熟悉模块化面向对象的方式编程熟悉Javascript编写过Javascript运动类库熟悉JQueryZeptoBootstrapNodeJsEasyUI使用了解AngularJs了解HTML 5新标签的语义熟练使用Css3新特性制作炫酷的页面效果熟练编写兼容主流浏览器的PC端和移动端页面布局熟练使用ChromeFirefoxIE等浏览器开发者工具调试查找问题';
+//        sTxt = sTxt.substring(0,111);
+        //填充li到ul
+        for (var i=0;i<sTxt.length;i++) {
+            var oLi = document.createElement('li');
+            oLi.innerHTML = sTxt[i];
+            oLi.id=i;
+            oUl.appendChild(oLi);
+        }
+        //假设等差双边数列公差=2，首项=3，则得出：2*n*n+2n-1<=sTxt.lenth。   而球面层数layers=2n-1
+        var n = 0;
+        for (var i = 3; i < 20; i++) {
+            if (2 * i * i + 2 * i - 1 > sTxt.length) {
+                n = i - 1;
+                break;
+            }
+        }
+        var layers = 2 * n - 1;
+
+        //假设园半径r=150px
+        var r = 150;
+        var aLi = oUl.getElementsByTagName('li');
+        for (var layer = 1; layer <= layers; layer++) {
+            var nums = getLayerNums(layer);
+            var aph=Math.PI*layer/(layers+1);
+            for (var num = 1; num <= nums; num++) {
+                var bld=2*Math.PI*(num-1)/nums;
+                var x=r*Math.sin(aph)*Math.cos(bld);
+                var y = r * Math.cos(aph);
+                var z = r * Math.sin(aph) * Math.sin(bld);
+                var transXYZ = 'translate3d(' +x+ 'px,' + y + 'px,' + z + 'px' + ')';
+               transXYZ += 'rotateY(' + (Math.PI / 2 - bld)+'rad)';
+//             transXYZ += ' rotateZ(' +(aph-Math.PI / 2 )+'rad)';
+               transXYZ += ' rotateX(' +(aph-Math.PI / 2)+'rad)';
+                var index = getIndex(layer, num);
+//                console.log(layer);
+//                console.log(num);
+//                console.log(index);
+                aLi[index].style.transform=transXYZ
+            }
+        }
+
+        //获取第layer层里的字数
+        function getLayerNums(layer) {
+            if (layer < (layers + 1) / 2) {
+                return 3 + (layer - 1) * 2
+            } else {
+                layer = layers + 1 - layer;
+                return 3 + (layer - 1) * 2
+            }
+        }
+
+        //获取当前字的索引
+        function getIndex(layer,num) {
+            if (layer<=(layers+1)/2) {
+                var index=3*(layer-1)+(layer-1)*(layer-2)+num-1;
+                return index;
+            }else {
+                var total1 = 3 * (layers + 1) / 2  + ((layers + 1) / 2)*((layers + 1) / 2 - 1);
+                var nn=layers+1-layer;
+                var total2 = 3 * nn + nn * (nn - 1);
+                var centerNums = 3 + ((layers + 1) / 2 - 1) * 2;
+                var index = 2*total1 - total2-centerNums + num - 1;
+                return index;
+            }
+        }
+    });
+
+    $('#bt2').click(function () {
+        var oUl = document.getElementById('ball');
+        var iNow=0;
+        setInterval(function () {
+            oUl.style.transform = 'rotateX(' + iNow + 'deg)'+'rotateY(' + 0 + 'deg)'+'rotateZ(' + 0 + 'deg)';
+            iNow++;
+        },100);
+    });
+    $('#ball').click(function () {
+        console.log($('#ball li').eq(0).css('transform'));
+//        $('#circle li').animate({translate3d: '2000px,2000px,2000px'}, 1000,'ease-out');
+    });
+</script>
